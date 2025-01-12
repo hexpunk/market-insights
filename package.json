@@ -1,0 +1,23 @@
+{
+  "name": "market-insights",
+  "version": "0.0.0",
+  "license": "UNLICENSED",
+  "type": "module",
+  "scripts": {
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "prettier": "3.4.2",
+    "typescript": "5.7.3",
+    "vitest": "2.1.8"
+  },
+  "dependencies": {
+    "cheerio": "1.0.0"
+  },
+  "prettier": {
+    "printWidth": 90,
+    "singleQuote": true,
+    "semi": true
+  }
+}
