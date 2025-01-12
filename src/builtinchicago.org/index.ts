@@ -6,7 +6,7 @@ import Thunk from '../thunk';
 const INITIAL_URL =
   'https://www.builtinchicago.org/jobs/remote/hybrid/office/dev-engineering';
 
-function getNumberOfPages($: cheerio.CheerioAPI) {
+function getNumberOfPages($: cheerio.CheerioAPI): number {
   return $('#pagination nav a')
     .toArray()
     .reduce((acc, el) => {
@@ -21,7 +21,11 @@ function getNumberOfPages($: cheerio.CheerioAPI) {
       }
 
       return acc;
-    }, 0);
+    }, 1); // Start with 1 because if a page was received, there is at least one page.
+}
+
+function getJobCardsFromListPage($: cheerio.CheerioAPI): cheerio.Element[] {
+  return $('[data-id=job-card]').toArray();
 }
 
 function fetchListPage(url: string): Thunk {
@@ -56,6 +60,16 @@ if (import.meta.vitest) {
 
     it('returns the number of pages', async () => {
       expect(getNumberOfPages($)).toBe(15);
+    });
+  });
+
+  describe('getJobCardsFromListPage', async () => {
+    const $ = cheerio.load(
+      await fs.readFile(__dirname + '/__fixtures__/first_page.html', 'utf-8'),
+    );
+
+    it('returns the job cards', async () => {
+      expect(getJobCardsFromListPage($)).toHaveLength(11);
     });
   });
 }
