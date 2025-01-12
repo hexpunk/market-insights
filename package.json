@@ -4,6 +4,7 @@
   "license": "UNLICENSED",
   "type": "module",
   "scripts": {
+    "postinstall": "patch-package",
     "test": "vitest"
   },
   "devDependencies": {
@@ -13,7 +14,8 @@
     "vitest": "2.1.8"
   },
   "dependencies": {
-    "cheerio": "1.0.0"
+    "cheerio": "1.0.0",
+    "patch-package": "8.0.0"
   },
   "prettier": {
     "printWidth": 90,
